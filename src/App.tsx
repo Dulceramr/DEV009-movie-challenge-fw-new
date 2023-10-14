@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { MovieList } from './components/MovieList/MovieList'
 import { OrderByGenre } from './components/OrderBy/OrderByGenre';
-import { OrderByVotes } from './components/OrderBy/OrderByVotes';
 import { SearchMovie } from './components/OrderBy/SearchMovie';
 
+type Movie = {
+  id:number;
+  title: string;
+  release_date: string;
+  poster_path: string;
+  overview: string;
+};
+
 function App() {
+
+  const [peliculas, setPeliculas] = useState<Movie[]>([]);
+
   return (
     <div className="App">
       <h1 className='main-title'>Movie Challenge</h1>
       <div className='select-container'>
-        <OrderByGenre />
-        <OrderByVotes />
-        <SearchMovie  />
+        <OrderByGenre setPeliculas={setPeliculas} />
+        <SearchMovie setPeliculas={setPeliculas} />
       </div>
-      <MovieList /> 
+      <MovieList peliculas={peliculas} />
     </div>
   );
 }

@@ -1,17 +1,26 @@
 import '../../styles/MovieList.css';
 
-export const MovieList = () => {
-  return (
-    <div className='container'>
-       <img
-            className='imageContainer'
-            alt='movie'
-            />
-            <div>
-                 <h5 className='titleContainer'>Title Container</h5>
-                 <p className='yearContainer'>Release Year</p>
+type Movie = {
+  id:number;
+  title: string;
+  release_date: string;
+  poster_path: string;
+  overview: string;
+};
 
-            </div> 
+type MovieListProps  = {
+  peliculas: Movie[];
+}
+
+export const MovieList: React.FC<MovieListProps> = ({peliculas}) => {
+  return (
+    <div className='movie-list'> {peliculas.map((pelicula) => (
+      <div key={pelicula.id} className="movie-card">
+        <img src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`} alt={pelicula.title}/>
+        <h2>{pelicula.title}</h2>
+        <p>{pelicula.release_date}</p>
+      </div>
+    ))}
     </div>
   )
 }
