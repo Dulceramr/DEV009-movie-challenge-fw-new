@@ -34,7 +34,7 @@ export const SearchMovie: React.FC<{setPeliculas: React.Dispatch<React.SetStateA
   };
 
   return (
-    <div className='container'>
+    <>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
@@ -46,6 +46,6 @@ export const SearchMovie: React.FC<{setPeliculas: React.Dispatch<React.SetStateA
           Search
         </button>
       </form>
-    </div>
+    </>
   );
 };
