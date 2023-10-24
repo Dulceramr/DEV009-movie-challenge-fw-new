@@ -8,7 +8,7 @@ type Movie = {
   overview: string;
 };
 
-export const SearchMovie: React.FC<{setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>> }> = ({ setPeliculas }) => {
+export const SearchMovie: React.FC<{setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>>, currentPage: number, setMode: React.Dispatch<React.SetStateAction<"search" | "genre" | null>> }> = ({ setPeliculas, currentPage, setMode }) => {
   const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
   const API_KEY = '03d8479e6ac8e870c3ef0fea7b1b15c3';
 
@@ -20,12 +20,13 @@ export const SearchMovie: React.FC<{setPeliculas: React.Dispatch<React.SetStateA
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setMode("search");
     fetchMovies();
   };
 
   const fetchMovies = async () => {
     try {
-      const response = await fetch(`${BASE_URL}?query=${busqueda}&api_key=${API_KEY}`);
+      const response = await fetch(`${BASE_URL}?query=${busqueda}&api_key=${API_KEY}&page=${currentPage}`);
       const data = await response.json();
       setPeliculas(data.results);
     } catch (error) {

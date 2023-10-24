@@ -16,9 +16,11 @@ type Genre = {
 
 type Props = {
   setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>>;
+  currentPage: number;
+  setMode: React.Dispatch<React.SetStateAction<"search" | "genre" | null>>; 
 }
 
-export const OrderByGenre: React.FC<Props> = ({ setPeliculas }) => {
+export const OrderByGenre: React.FC<Props> = ({ setPeliculas, currentPage, setMode }) => {
   const BASE_URL = 'https://api.themoviedb.org/3';
   const API_KEY = '03d8479e6ac8e870c3ef0fea7b1b15c3';
 
@@ -40,9 +42,10 @@ useEffect(() => {
 
   const handleByChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedGenre = event.target.value;
+        setMode("genre");
 
         try {
-          const response = await fetch(`${BASE_URL}/discover/movie?with_genres=${selectedGenre}&api_key=${API_KEY}`);
+          const response = await fetch(`${BASE_URL}/discover/movie?with_genres=${selectedGenre}&api_key=${API_KEY}&page=${currentPage}`);
           const data = await response.json();
           setPeliculas(data.results);
         } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { MovieList } from './components/MovieList/MovieList'
 import { OrderByGenre } from './components/OrderBy/OrderByGenre';
@@ -20,12 +20,14 @@ function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const totalPages = Math.ceil(peliculas.length / 10);
 
+  const [mode, setMode] = useState<"search" | "genre" | null>(null);
+
   return (
     <>
       <h1 className='main-title'>Movie Challenge</h1>
       <div className='select-container'>
-        <OrderByGenre setPeliculas={setPeliculas} />
-        <SearchMovie setPeliculas={setPeliculas} />
+      <OrderByGenre setPeliculas={setPeliculas} currentPage={currentPage} setMode={setMode} />
+      <SearchMovie setPeliculas={setPeliculas} currentPage={currentPage} setMode={setMode} />
       </div>
       <MovieList peliculas={peliculas.slice((currentPage - 1) * 10, currentPage * 10)} />
       <Pagination 
