@@ -1,5 +1,41 @@
-.container{
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url('../images/background-body.png');
+    background-size: cover;
+}
+
+.movie-image{
+    width:14em;
+    margin: 1em;
+    border-radius: 5%;
+    object-fit: cover;
+}
+
+.title-date-container{
+    background-color: #f9e7e5;
+    border-radius: 25px;
     width: 15em;
-    margin: 2em;
-    text-align: center;
+    height: 8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Jacques Francois', serif;
+    font-family: 'Montserrat', sans-serif;
+    color: #706E6B;
+    padding: 4%;
+}
+
+.movie-table{
+    width: 100%;
+    margin: 2%;
+}
+
+.movie-card{
+    margin: 4em;
+    border: red solid;
 }
