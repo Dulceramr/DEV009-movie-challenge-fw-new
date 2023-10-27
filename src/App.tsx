@@ -17,7 +17,6 @@ function App() {
 
   const [peliculas, setPeliculas] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = Math.ceil(peliculas.length / 10);
 
   return (
     <>
