@@ -1,32 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 type Movie = {
-    id:number;
-    title: string;
-    release_date: string;
-    poster_path: string;
-    overview: string;
-  };
-
-type Props = {
-  setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>>;
+  id:number;
+  title: string;
+  release_date: string;
+  poster_path: string;
+  overview: string;
 };
 
-const SortBy: React.FC<Props> = ({ setPeliculas }) => {
+const SortBy: React.FC<{
+  setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>>,
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>,
+  currentPage: number 
+}> = ({ setPeliculas, setTotalPages, currentPage }) => {
   const BASE_URL = 'https://api.themoviedb.org/3/discover/movie';
   const API_KEY = '03d8479e6ac8e870c3ef0fea7b1b15c3';
 
-  const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const sortByValue = event.target.value;
+  const [sortByValue, setSortByValue] = useState<string>("popularity.desc");
 
-    try {
-      const response = await fetch(`${BASE_URL}?api_key=${API_KEY}&sort_by=${sortByValue}`);
-      const data = await response.json();
-      setPeliculas(data.results);
-    } catch (error) {
-      console.error("Error fetching sorted movies:", error);
-    }
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const sortBy = event.target.value;
+    setSortByValue(sortBy);
   };
+
+  useEffect(() => {
+    const fetchSortedMovies = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}?api_key=${API_KEY}&sort_by=${sortByValue}&page=${currentPage}`);
+        const data = await response.json();
+        setPeliculas(data.results);
+        setTotalPages(data.total_pages);
+      } catch (error) {
+        console.error("Error fetching sorted movies:", error);
+      }
+    };
+    fetchSortedMovies();
+  }, [sortByValue, currentPage]);
 
   return (
     <div>
@@ -41,4 +50,3 @@ const SortBy: React.FC<Props> = ({ setPeliculas }) => {
 };
 
 export default SortBy;
-

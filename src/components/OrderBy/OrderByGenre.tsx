@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import '../../styles/OrderByGenre.css';
+import React, { useEffect, useState } from 'react';
 
 type Movie = {
   id:number;
@@ -14,16 +13,16 @@ type Genre = {
   name: string;
 };
 
-type Props = {
-  setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>>;
-  currentPage: number;
-}
-
-export const OrderByGenre: React.FC<Props> = ({ setPeliculas, currentPage }) => {
+export const OrderByGenre: React.FC<{
+  setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>>,
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>,
+  currentPage: number 
+}> = ({ setPeliculas, setTotalPages, currentPage }) => {
   const BASE_URL = 'https://api.themoviedb.org/3';
   const API_KEY = '03d8479e6ac8e870c3ef0fea7b1b15c3';
 
   const [genres, setGenres] = useState<Genre[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<string>("");
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -39,17 +38,26 @@ export const OrderByGenre: React.FC<Props> = ({ setPeliculas, currentPage }) => 
     fetchGenres();
   }, []);
 
-  const handleByChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedGenre = event.target.value;
-
-    try {
-      const response = await fetch(`${BASE_URL}/discover/movie?with_genres=${selectedGenre}&api_key=${API_KEY}&page=${currentPage}`);
-      const data = await response.json();
-      setPeliculas(data.results);
-    } catch (error) {
-      console.error("Error fetching movies by genre:", error);
-    }
+  const handleByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const genre = event.target.value;
+    setSelectedGenre(genre);
   };
+
+  useEffect(() => {
+    if (selectedGenre) {
+      const fetchMoviesByGenre = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/discover/movie?with_genres=${selectedGenre}&api_key=${API_KEY}&page=${currentPage}`);
+          const data = await response.json();
+          setPeliculas(data.results);
+          setTotalPages(data.total_pages);
+        } catch (error) {
+          console.error("Error fetching movies by genre:", error);
+        }
+      };
+      fetchMoviesByGenre();
+    }
+  }, [currentPage, selectedGenre]);
 
   return (
     <div className='container'>
