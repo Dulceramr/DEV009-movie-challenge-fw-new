@@ -12,7 +12,8 @@ const SearchMovie: React.FC<{
   setPeliculas: React.Dispatch<React.SetStateAction<Movie[]>>,
   setTotalPages: React.Dispatch<React.SetStateAction<number>>,
   currentPage: number 
-}> = ({ setPeliculas, setTotalPages, currentPage }) => {
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}> = ({ setPeliculas, setTotalPages, currentPage, setCurrentPage  }) => {
   const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
   const API_KEY = '03d8479e6ac8e870c3ef0fea7b1b15c3';
 
@@ -21,7 +22,8 @@ const SearchMovie: React.FC<{
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = event.target.value;
     setSearchTerm(searchValue);
-  };
+    setCurrentPage(1); // Reinicia la página a 1
+};
 
   useEffect(() => {
     if (searchTerm) {

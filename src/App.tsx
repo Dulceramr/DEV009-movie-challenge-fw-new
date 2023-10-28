@@ -23,9 +23,9 @@ function App() {
     <>
       <h1 className='main-title'>Movie Challenge</h1>
       <div className='select-container'>
-        <OrderByGenre setPeliculas={setPeliculas} setTotalPages={setTotalPages} currentPage={currentPage} />
-        <SortBy setPeliculas={setPeliculas} setTotalPages={setTotalPages} currentPage={currentPage} />
-        <SearchMovie setPeliculas={setPeliculas} setTotalPages={setTotalPages} currentPage={currentPage} />
+        <OrderByGenre setPeliculas={setPeliculas} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+        <SortBy setPeliculas={setPeliculas} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+        <SearchMovie setPeliculas={setPeliculas} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </div>
       <MovieList peliculas={peliculas} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
