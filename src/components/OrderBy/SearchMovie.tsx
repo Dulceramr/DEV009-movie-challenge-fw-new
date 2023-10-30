@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import "./SearchMovie.css"
 
 type Movie = {
   id: number;
@@ -42,12 +45,14 @@ const SearchMovie: React.FC<{
   }, [searchTerm, currentPage]);
 
   return (
-    <div>
+    <div className="search-container">
+      <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
       <input
         type="text"
         placeholder="Search for a movie..."
         value={searchTerm}
         onChange={handleSearchChange}
+        className="search-input"
       />
     </div>
   );
