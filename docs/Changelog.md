@@ -43,3 +43,26 @@ Cambie los estilos.
 ### Removed
 
 Intente hacer la paginación pero no me salió y mejor la quite, lo intentare de nuevo en el siguiente sprint.
+
+# Changelog
+## <1.2.0> - <2023-10-30>
+
+### Sprint learnings
+
+Profundice sobre el uso de useEffect en React.
+
+### Added
+
+Creación de componentes Pagination y MovieDetail.
+
+### Changed
+
+Modifique los estilos, agregue una imagen de background en el body, el estilo de los botones y los select.
+
+### Fixed
+
+Nada.
+
+### Removed
+
+Estilos anteriores.

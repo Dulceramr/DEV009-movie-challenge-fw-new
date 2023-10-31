@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Pagination.css"
 
 const Pagination: React.FC<{
   currentPage: number,
@@ -41,19 +42,20 @@ const Pagination: React.FC<{
   const pageNumbers = generatePageNumbers();
 
   return (
-    <div>
-      {currentPage > 1 && <button onClick={() => onPageChange(currentPage - 1)}>Anterior</button>}
+    <div className='pagination-container'>
+      {currentPage > 1 && <button className="large-button" onClick={() => onPageChange(currentPage - 1)}>Anterior</button>}
       
       {pageNumbers.map(number => (
         <button 
           key={number}
           onClick={() => onPageChange(number)}
-          style={{ backgroundColor: number === currentPage ? 'grey' : 'white' }}>
+          className={number === currentPage ? 'button-current-page' : 'button'}
+          >
           {number}
         </button>
       ))}
 
-      {currentPage < totalPages && <button onClick={() => onPageChange(currentPage + 1)}>Siguiente</button>}
+      {currentPage < totalPages && <button className="large-button" onClick={() => onPageChange(currentPage + 1)}>Siguiente</button>}
     </div>
   );
 };

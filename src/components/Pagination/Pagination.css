@@ -1,0 +1,34 @@
+.button{
+    background-color: #fff;
+    color: #2E4053;
+    border: 1px solid #717D7E;
+    border-radius: 45%;
+    height: 3em;
+    width: 3em;
+    margin: 4px;
+}
+
+.button-current-page{
+    background-color: #CCD1D1;
+    color: #2E4053;
+    border: 1px solid #717D7E;
+    border-radius: 45%;
+    height: 3em;
+    width: 3em;
+    margin: 4px;
+}
+
+.large-button{
+    background-color: #fff;
+    color: #2E4053;
+    border: 1px solid #717D7E;
+    border-radius: 45%;
+    height: 3em;
+}
+
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3em;
+}
