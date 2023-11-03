@@ -42,8 +42,8 @@ const SortBy: React.FC<{
 
   return (
     <div>
-      <label htmlFor="sortBy">Sort by: </label>
-      <select id="sortBy" className="button-sort-by"onChange={handleChange}>
+      <label className="label-sort-by" htmlFor="sortBy">Sort by: </label>
+      <select id="sortBy" className="button-sort-by" onChange={handleChange}>
         <option value="popularity.desc">Popularity Descending</option>
         <option value="original_title.asc">Title Ascending</option>
         <option value="vote_average.desc">Rating Descending</option>

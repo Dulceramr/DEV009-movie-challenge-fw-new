@@ -64,7 +64,7 @@ export const OrderByGenre: React.FC<{
 
   return (
     <div className='container'>
-      <label htmlFor='orderByGenre'>Order by Genre </label>
+      <label className="label-order-by-genre" htmlFor='orderByGenre'>Order by Genre </label>
       <select id='orderByGenre' className="button-order-by-genre" onChange={handleByChange}>
         {genres.map((genre: Genre) => (
           <option key={genre.id} value={genre.id}>
